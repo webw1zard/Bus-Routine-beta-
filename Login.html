@@ -1,0 +1,160 @@
+<!DOCTYPE html> 
+<html lang="uz"> 
+  <head> 
+    <meta charset="UTF-8" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+    <title>Kirish Sahifasi</title> 
+    <link 
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
+      rel="stylesheet" 
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
+      crossorigin="anonymous" 
+    /> 
+    <style> 
+      body { 
+        font-family: Arial, sans-serif; 
+        background-color: #f7f9fc; 
+        margin: 0; 
+        padding: 0; 
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        height: 100vh; 
+        background: url(./Images/photo_5918971740485168993_w.jpg) no-repeat center center fixed;
+    z-index: 99999;
+    margin: auto;
+      } 
+ 
+      .login-container { 
+        background-color: #ffffff; 
+        border: 1px solid #e0e0e0; 
+        border-radius: 8px; 
+        padding: 20px; 
+        width: 400px; 
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+      } 
+ 
+      h2 { 
+        font-size: 18px; 
+        margin-bottom: 20px; 
+        color: #333333; 
+      } 
+ 
+      p a { 
+        text-decoration: none; 
+        color: #007bff; 
+        font-size: 20px; 
+      } 
+ 
+      h2 a { 
+        color: #007bff; 
+        text-decoration: none; 
+      } 
+ 
+      .form-group { 
+        margin-bottom: 15px; 
+      } 
+ 
+      label { 
+        display: block; 
+        font-size: 14px; 
+        margin-bottom: 5px; 
+        color: #555555; 
+      } 
+ 
+      input { 
+        width: 100%; 
+        padding: 10px; 
+        font-size: 14px; 
+        border: 1px solid #dcdcdc; 
+        border-radius: 4px; 
+        box-sizing: border-box; 
+      } 
+ 
+      input:focus { 
+        border-color: #007bff; 
+        outline: none; 
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
+      } 
+ 
+      .d-flex { 
+        display: flex; 
+        align-items: center; 
+        justify-content: space-between; 
+        padding: 1rem; 
+      } 
+ 
+      .btn { 
+        background-color: #007bff; 
+        color: white; 
+      } 
+    </style> 
+  </head> 
+  <body> 
+    <div class="login-container"> 
+      <h2><a href="#">Ro'yxatdan o'tish</a></h2> 
+      <form> 
+        <div class="form-group"> 
+          <label for="full-name">F.I.O*</label> 
+          <input 
+            type="text" 
+            id="full-name" 
+            placeholder="Yo‘lovchi ismi" 
+            required 
+          /> 
+        </div> 
+        <div class="form-group"> 
+          <label for="phone">Telefon raqami*</label> 
+          <input type="tel" id="phone" placeholder="+998" required /> 
+        </div> 
+        <div class="form-group"> 
+          <label for="email">Elektron pochta</label> 
+          <input type="email" id="email" placeholder="Elektron pochta" /> 
+        </div> 
+        <div class="d-flex"> 
+          <button class="btn" type="submit" onclick="window.location.href='./Hakaton.html'">Ro'yxatdan o'tish</button> 
+          <p><a href="./Hakaton.html">Orqaga</a></p> 
+        </div> 
+      </form> 
+    </div> 
+ 
+    <script> 
+      document.addEventListener("DOMContentLoaded", function () { 
+        const form = document.querySelector("form"); 
+        const fullNameInput = document.getElementById("full-name"); 
+        const phoneInput = document.getElementById("phone"); 
+        const emailInput = document.getElementById("email"); 
+        const button = form.querySelector("button"); 
+ 
+        const users = JSON.parse(localStorage.getItem("users")) || []; 
+ 
+        button.addEventListener("click", function (event) { 
+          event.preventDefault(); 
+ 
+          const fullName = fullNameInput.value.trim(); 
+          const phone = phoneInput.value.trim(); 
+          const email = emailInput.value.trim(); 
+ 
+          if (!fullName || !phone) { 
+            alert("F.I.O va telefon raqami majburiy!"); 
+            return; 
+          } 
+ 
+          const user = { 
+            fullName, 
+            phone, 
+            email: email || "Ko'rsatilmagan", 
+          }; 
+ 
+          users.push(user); 
+ 
+          localStorage.setItem("users", JSON.stringify(users)); 
+ 
+          form.reset(); 
+ 
+          alert("Foydalanuvchi muvaffaqiyatli ro'yxatdan o'tkazildi!"); 
+        }); 
+      }); 
+    </script> 
+  </body> 
+</html>

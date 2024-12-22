@@ -1,0 +1,129 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="Hakaton.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<style>
+    .gg{
+        border: 2px solid white;
+        background-color: black;
+    }
+</style>
+<body class="p-3">
+    <div class="header__menu">
+            <div class="row my-4 text-center">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="from" style="color: white;">Qayerdan</label>
+                        <input type="text" class="form-control" id="from" placeholder="Qashqadaryo..." data-toggle="modal" data-target="#fromModal">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="to" style="color: white;">Qayerga</label>
+                        <input type="text" class="form-control" id="to" placeholder="Toshkent shahri, Tosh..." data-toggle="modal" data-target="#toModal">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="date" style="color: white;" >Qachon</label>
+                        <input type="date" class="form-control" id="date" value="2024-12-27">
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mb-4">
+                <button id="searchButton" class="btn btn-info btn-lg">Qidirishni boshlash</button>
+            </div>
+        </main>
+
+        <div id="busResults" class="my-4" style="display:none;">
+            <table class="table table-bordered table-striped table-dark gg">
+                <thead>
+                    <tr>
+                        <th>Raqam</th>
+                        <th>Yo'nalish</th>
+                        <th>Jo'nash vaqti</th>
+                        <th>Chipta narxi</th>
+                    </tr>
+                </thead>
+                <tbody id="busTableBody">
+                </tbody>
+            </table>
+        </div>
+
+        <footer class="footer">
+            <p>&copy; 2024 AvtoTicket. Barcha huquqlar himoyalangan.</p>
+        </footer>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const fromInput = document.getElementById('from');
+            const toInput = document.getElementById('to');
+
+            const setupLocationSelection = (modalId, inputElement) => {
+                const modal = document.getElementById(modalId);
+                modal.querySelectorAll('.location').forEach(locationLink => {
+                    locationLink.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const location = locationLink.dataset.location;
+                        inputElement.value = location;
+                        $(`#${modalId}`).modal('hide');
+                    });
+                });
+            };
+
+            setupLocationSelection('fromModal', fromInput);
+            setupLocationSelection('toModal', toInput);
+
+            document.getElementById('searchButton').addEventListener('click', () => {
+                const from = fromInput.value.trim();
+                const to = toInput.value.trim();
+                const date = document.getElementById('date').value;
+
+                if (from && to && date) {
+                    const busResults = generateBusResults(from, to, date);
+                    displayBusResults(busResults);
+                } else {
+                    alert('Iltimos, barcha maydonlarni to‘ldiring.');
+                }
+            });
+
+            function generateBusResults(from, to, date) {
+                const buses = [];
+                for (let i = 1; i <= 10; i++) {  
+                    buses.push({
+                        id: i,
+                        route: `${from} - ${to}`,
+                        departureTime: `${date} ${i + 8}:00`,  
+                        price: `${(Math.random() * 50 + 10).toFixed(2)} UZS`  
+                    });
+                }
+                return buses;
+            }
+
+            function displayBusResults(buses) {
+                const busTableBody = document.getElementById('busTableBody');
+                busTableBody.innerHTML = '';  
+                buses.forEach(bus => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${bus.id}</td>
+                        <td>${bus.route}</td>
+                        <td>${bus.departureTime}</td>
+                        <td>${bus.price}</td>
+                    `;
+                    busTableBody.appendChild(row);
+                });
+                document.getElementById('busResults').style.display = 'block'; 
+            }
+        });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,316 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="Hakaton.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+</head>
+<style>
+    .li{
+        color: black;
+        text-decoration: none;
+    }
+</style>
+<!-- https://avtoticket.uz/svg/Logo.svg -->
+<body class="p-3">
+    <div class="header__menu" data-aos="fade-down" > 
+        <ul class="n"> 
+            <div class="d-flex justify-content-start gap-5"> 
+                <li><a href="#"><img src="./images/gg.jpg" alt="" class="img" style="width: 170px; border-radius: 100px;"></a></li> 
+            </div> 
+            <div class="d-flex justify-content-end gap-5 align-items-center" > 
+                <li id="Home"><a href="#">Asosiy</a></li> 
+                <li id="About"><a href="./about.html">Biz haqimizda</a></li>
+                <li><a href="https://www.google.com/maps">Google Map</a></li> 
+                <li id="Ticket"><a href="./Ticket.html">Chiptani Tiklash</a></li> 
+                <li id="Questions"><a href="Question.html">Savol/Javob</a></li> 
+                <li id="Login" class="text-secondary" style="background: linear-gradient(rgb(91, 36, 122) 0%, rgb(27, 206, 223) 100%); align-items: center; justify-content: center ; text-decoration: none; border-radius: 5px; padding: 10px 20px; font-size: 16px; font-weight: bold; transition: background-color 0.3s ease; cursor: pointer;"> 
+                    <a class="text-light bb text-center " style="margin-left: 15px;" href="./Login.html">Login</a> 
+                </li> 
+            </div> 
+        </ul> 
+    </div> 
+ 
+    <main class="container my-5"> 
+        <div class="hero-text" data-aos="fade-up"> 
+            <h1 style="background: linear-gradient(rgb(91, 36, 122) 0%, rgb(27, 206, 223) 100%); -webkit-background-clip: text; color: transparent;"> 
+                <span>O‘zbekistonda</span> kunlik avtobus reyslari 
+            </h1> 
+            <p style="background: linear-gradient(rgb(91, 36, 122) 0%, rgb(27, 206, 223) 100%); -webkit-background-clip: text; color: transparent;"> 
+                Biz barcha viloyatlar bo‘ylab mashhur yo‘nalishlarni taklif qilamiz. Samarqand, Jizzax, Buxoro 
+            </p> 
+        </div>
+        <div class="row my-4 text-center" data-aos="zoom-in"> 
+            <div class="col-md-4"> 
+                <div class="form-group"> 
+                    <label for="from" style="color: white;">Qayerdan</label> 
+                    <input type="text" class="form-control p-3 mt-2" id="from" placeholder="Qashqadaryo..." data-toggle="modal" data-target="#fromModal" p-3 mt-2> 
+                </div> 
+            </div> 
+            <div class="col-md-4"> 
+                <div class="form-group"> 
+                    <label for="to" style="color: white;">Qayerga</label> 
+                    <input type="text" class="form-control p-3 mt-2" id="to" placeholder="Toshkent shahri, Tosh..." data-toggle="modal" data-target="#toModal"> 
+                </div> 
+            </div> 
+            <div class="col-md-4"> 
+                <div class="form-group"> 
+                    <label for="date" style="color: white;">Qachon</label> 
+                    <input type="date" class="form-control p-3 mt-2" id="date" value="2024-12-27"> 
+                </div> 
+            </div> 
+        </div> 
+ 
+        <div class="text-center mb-4"> 
+            <button id="searchButton" class="btn btn-info btn-lg text-light">Qidirishni boshlash</button> 
+        </div> 
+    </main> 
+ 
+    <div id="busResults" class="my-4" style="display:none;" data-aos="fade-left"> 
+        <table class="table table-bordered"> 
+            <thead> 
+                <tr> 
+                    <th>Raqam</th> 
+                    <th>Yo'nalish</th> 
+                    <th>Jo'nash vaqti</th> 
+                    <th>Chipta narxi</th> 
+                </tr> 
+            </thead> 
+            <tbody id="busTableBody"> 
+            </tbody> 
+        </table> 
+    </div> 
+ 
+    <div class="modal fade" id="fromModal" tabindex="-1" role="dialog" aria-labelledby="fromModalLabel" aria-hidden="true"> 
+        <div class="modal-dialog" role="document"> 
+            <div class="modal-content"> 
+                <div class="modal-header"> 
+                    <h5 class="modal-title" id="fromModalLabel">Viloyatni tanlang</h5> 
+                    <button type="button" class="close btn btn-dark ms-3 " data-dismiss="modal" aria-label="Close"> 
+                        <span aria-hidden="true">&times;</span>
+</button> 
+                </div> 
+                <div class="modal-body"> 
+                    <ul> 
+                        <li class="li"><a href="#" class="location li" data-location="Samarqand">Samarqand</a></li> 
+                        <li class="li"><a href="#" class="location li" data-location="Jizzax">Jizzax</a></li> 
+                        <li class="li"><a href="#" class="location li" data-location="Buxoro">Buxoro</a></li> 
+                        <li class="li"><a href="#" class="location li" data-location="Toshkent">Toshkent</a></li> 
+                        <li class="li"><a href="#" class="location li" data-location="Namangan">Namangan</a></li> 
+                        <li class="li"><a href="#" class="location li" data-location="Farg‘ona">Farg‘ona</a></li> 
+                        <li class="li"><a href="#" class="location li" data-location="Andijon">Andijon</a></li> 
+                        <li class="li"><a href="#" class="location li" data-location="Qashqadaryo">Qashqadaryo</a></li> 
+                        <li class="li"><a href="#" class="location li" data-location="Sirdaryo">Sirdaryo</a></li> 
+                        <li class="li"><a href="#" class="location li" data-location="Xorazm">Xorazm</a></li> 
+                        <li class="li"><a href="#" class="location li" data-location="Navoiy">Navoiy</a></li> 
+                        <li class="li"><a href="#" class="location li" data-location="Qoraqalpog‘iston Respublikasi">Qoraqalpog‘iston Respublikasi</a></li> 
+                    </ul> 
+                </div> 
+            </div> 
+        </div> 
+    </div> 
+ 
+    <div class="modal fade" id="toModal" tabindex="-1" role="dialog" aria-labelledby="toModalLabel" aria-hidden="true"> 
+        <div class="modal-dialog" role="document"> 
+            <div class="modal-content"> 
+                <div class="modal-header"> 
+                    <h5 class="modal-title" id="toModalLabel">Boriladigan viloyatni tanlang</h5> 
+                    <button type="button" class="close btn btn-dark ms-3" data-dismiss="modal" aria-label="Close"> 
+                        <span aria-hidden="true">&times;</span> 
+                    </button> 
+                </div> 
+                <div class="modal-body"> 
+                    <ul> 
+                        <li class="li"><a href="#" class="location li li" data-location="Samarqand">Samarqand</a></li> 
+                        <li class="li"><a href="#" class="location li li" data-location="Jizzax">Jizzax</a></li> 
+                        <li class="li"><a href="#" class="location li li" data-location="Buxoro">Buxoro</a></li> 
+                        <li class="li"><a href="#" class="location li li" data-location="Toshkent">Toshkent</a></li> 
+                        <li class="li"><a href="#" class="location li li" data-location="Namangan">Namangan</a></li> 
+                        <li class="li"><a href="#" class="location li li" data-location="Farg‘ona">Farg‘ona</a></li> 
+                        <li class="li"><a href="#" class="location li li" data-location="Andijon">Andijon</a></li> 
+                        <li class="li"><a href="#" class="location li li" data-location="Qashqadaryo">Qashqadaryo</a></li> 
+                        <li class="li"><a href="#" class="location li li" data-location="Sirdaryo">Sirdaryo</a></li> 
+                        <li class="li"><a href="#" class="location li li" data-location="Xorazm">Xorazm</a></li> 
+                        <li class="li"><a href="#" class="location li li" data-location="Navoiy">Navoiy</a></li> 
+                        <li class="li"><a href="#" class="location li li" data-location="Qoraqalpog‘iston Respublikasi">Qoraqalpog‘iston Respublikasi</a></li> 
+                    </ul> 
+                </div> 
+            </div> 
+        </div> 
+    </div> 
+    <div class="row">   
+        <div class="col-md-4 mb-4">   
+            <div class="card"> 
+                <div class="card-body "> 
+                    <h2 class="card-title">Qanday qilib chipta sotib olish mumkin?</h2> 
+                    <p class="card-text">Siz uchun bir nechta foydali video darslar tayyorladik.</p> 
+                    <div class="video-card"> 
+                        <iframe width="100%" height="200" src="https://www.youtube.com/embed/EFbSCbk-qE0?si=ZlARX9olUfpQPbM2" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
+                    </div> 
+                    <div class="video-card mt-3"> 
+                        <iframe width="100%" height="200" src="https://www.youtube.com/embed/oQkkzTQ16-o?si=u3CGO8yBf2zd1EaW" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
+                    </div> 
+                    <button class="btn btn-outline-primary mt-2" >Barcha video darslarni ko‘rish</button> 
+                </div> 
+            </div> 
+        </div>   
+     
+        <div class="col-md-4 mb-4"> 
+            <div class="card"> 
+                <div class="card-body"> 
+                    <div class="container"> 
+                        <h2>Chiptani tiklash</h2> 
+                        <p>Telefon raqamini kiriting:</p> 
+                        <input type="text" id="phone" placeholder="+998 _ _ __ __" class="form-control mb-4" /> 
+         
+                        <div id="smsCodeSection" style="display: none;"> 
+                            <p>SMS kodni kiriting:</p> 
+                            <input type="text" id="smsCode" placeholder="SMS kod" class="form-control mb-4" /> 
+                        </div> 
+         
+                        <button onclick="sendSMS()" id="smsCodeButton" class="btn btn-outline-dark p-3 mx-auto d-block">SMS kodini yuborish</button> 
+                    </div> 
+                </div> 
+            </div> 
+        </div> 
+     
+        <div class="col-md-4 mb-4">   
+            <div class="card"> 
+                <div class="card-body"> 
+                    <h2 class="card-title">Kontakt</h2> 
+                    <p class="card-text">+998 94 121 44 02</p> 
+                    <p class="card-text">Muammo yuzaga keldi? 8:00-20:00 texnik yordamga murojaat qiling</p> 
+                    <p>Admin tizimda boshqaruvni amalga oshiruvchi asosiy shaxsdir. U foydalanuvchilarni ro'yxatga olish, ularning huquqlarini boshqarish, tizimning xavfsizligini ta'minlash va muammolarni hal qilish kabi vazifalarni bajaradi. Adminning asosiy maqsadi tizimning samarali ishlashini ta'minlash va foydalanuvchilarga qulaylik yaratishdir. Shuningdek, admin barcha resurslarni to'g'ri taqsimlab, tizimning yangilanishlarini o'z vaqtida amalga oshiradi.</p> 
+                    <button class="btn btn-outline-primary" onclick="()=>alert('+998 94 121 44 02')">Qo‘ng‘iroq qilish</button> 
+                </div> 
+            </div> 
+        </div> 
+    </div> 
+  
+ 
+    <footer class="footer"> 
+        <p>&copy; 2024 AvtoTicket. Barcha huquqlar himoyalangan.</p> 
+    </footer>
+                
+            
+                <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+                <script>
+AOS.init();
+document.addEventListener('DOMContentLoaded', () => {
+    const fromInput = document.getElementById('from');
+    const toInput = document.getElementById('to');
+
+    const setupLocationSelection = (modalId, inputElement) => {
+        const modal = document.getElementById(modalId);
+        modal.querySelectorAll('.location').forEach(locationLink => {
+            locationLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                const location = locationLink.dataset.location;
+                inputElement.value = location;
+                $(`#${modalId}`).modal('hide');
+            });
+        });
+    };
+
+    setupLocationSelection('fromModal', fromInput);
+    setupLocationSelection('toModal', toInput);
+
+    document.getElementById('searchButton').addEventListener('click', () => {
+        const from = fromInput.value.trim();
+        const to = toInput.value.trim();
+        const date = document.getElementById('date').value;
+
+        if (from && to && date) {
+            alert(`Qidirilayotgan ma'lumot:\n\nОткуда: ${from}\nКуда: ${to}\nКогда: ${date}`);
+        } else {
+            alert('Iltimos, barcha maydonlarni to‘ldiring.');
+        }
+    });
+
+    document.querySelector('.btn-outline-primary').addEventListener('click', () => {
+        alert('Biz bilan bog‘lanish uchun: +998 71 207 87 00');
+    });
+});
+
+function sendSMS() {
+        const phoneInput = document.getElementById('phone').value;
+        if (phoneInput) {
+            document.getElementById('smsCodeSection').style.display = 'block';
+            document.getElementById('smsCodeButton').innerHTML = 'Sms kodni tasdiqlash';
+           
+        } else {
+            alert('Iltimos, telefon raqamini kiriting.');
+        }
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+            const fromInput = document.getElementById('from');
+            const toInput = document.getElementById('to');
+
+            const setupLocationSelection = (modalId, inputElement) => {
+                const modal = document.getElementById(modalId);
+                modal.querySelectorAll('.location').forEach(locationLink => {
+                    locationLink.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const location = locationLink.dataset.location;
+                        inputElement.value = location;
+                        $(`#${modalId}`).modal('hide');
+                    });
+                });
+            };
+
+            setupLocationSelection('fromModal', fromInput);
+            setupLocationSelection('toModal', toInput);
+
+            document.getElementById('searchButton').addEventListener('click', () => {
+                const from = fromInput.value.trim();
+                const to = toInput.value.trim();
+                const date = document.getElementById('date').value;
+
+                if (from && to && date) {
+                    const busResults = generateBusResults(from, to, date);
+                    displayBusResults(busResults);
+                } else {
+                    alert('Iltimos, barcha maydonlarni to‘ldiring.');
+                }
+            });
+
+            function generateBusResults(from, to, date) {
+                const buses = [];
+                for (let i = 1; i <= 10; i++) {  
+                    buses.push({
+                        id: i,
+                        route: `${from} - ${to}`,
+                        departureTime: `${date} ${i + 8}:00`,  
+                        price: `${(Math.random() * 50 + 10).toFixed(2)} UZS`  
+                    });
+                }
+                return buses;
+            }
+
+          
+            function displayBusResults(buses) {
+                const busTableBody = document.getElementById('busTableBody');
+                busTableBody.innerHTML = '';  
+                buses.forEach(bus => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${bus.id}</td>
+                        <td>${bus.route}</td>
+                        <td>${bus.departureTime}</td>
+                        <td>${bus.price}</td>
+                    `;
+                    busTableBody.appendChild(row);
+                });
+                document.getElementById('busResults').style.display = 'block'; 
+            }
+        });
+                </script>
+    <script src="Hakaton.js"></script>
+</body>
+</html>
